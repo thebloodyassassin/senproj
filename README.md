@@ -1,4 +1,0 @@
-senproj
-=======
-
-Rails Senior Project

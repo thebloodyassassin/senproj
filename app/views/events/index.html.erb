@@ -1,5 +1,8 @@
 <h1>Our Blog</h1>
+<hr />
 <% @events.each do |e| %>
 	<h2><%= e.name %></h2>
 	<h2><%= e.descrip %></h2>
+	<h2><%= e.coord %></h2>
+	<hr />
 <% end %>

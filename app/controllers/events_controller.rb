@@ -8,11 +8,13 @@ class EventsController < ApplicationController
 	end
 
 	def new
-
+		@event = Event.new
 	end
 
 	def create
+		@event = Event.new(params[:name])
 
+		@event.save
 	end
 
 	def update

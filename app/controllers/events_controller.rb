@@ -44,12 +44,15 @@ class EventsController < ApplicationController
 	def edit
 		@event = Event.find(params[:id])
 	end
-
+	
 	def destroy_all
 		@events = Event.all
 
-		@events.destroy
-		redirect_to events_path
+		if @events.destroy
+			redirect_to events_path
+		else
+			redirect_to events_path
+		end
 	end
 
 	private

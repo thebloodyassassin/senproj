@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+	before_filter :authenticate, :except => [:index, :show]
 	def index
 		@events = Event.all			
 	end
@@ -45,14 +46,12 @@ class EventsController < ApplicationController
 		@event = Event.find(params[:id])
 	end
 	
-	def destroy_all
+	def destroy_all_events
 		@events = Event.all
 
-		if @events.destroy
-			redirect_to events_path
-		else
-			redirect_to events_path
-		end
+		@events.destroy_all
+
+		redirect_to events_path
 	end
 
 	private
@@ -62,5 +61,12 @@ class EventsController < ApplicationController
 
 		def edit_params
 			params.require(:event).permit(:event, :name, :descrip, :coord)
+		end
+
+	private
+		def authenticate
+			authenticate_or_request_with_http_basic do |name, password|
+				name == "moderator" && password == "modpass"
+			end
 		end
 end

@@ -1,9 +1,13 @@
 Seniorproj::Application.routes.draw do
+  devise_for :events
+  devise_for :users
   resources :events do
     member do
       get 'destroy_all_events'
     end
   end
+
+  root to: "events#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
